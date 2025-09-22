@@ -1,27 +1,50 @@
-// Antes
-// const msg: HTMLElement | null = document.getElementById("msg")!;
-// const count: HTMLElement | null = document.getElementById("count")!
+const BINDING_MARK = "data-bind";
+const spans = document.querySelectorAll("[" + BINDING_MARK + "]");
+type E = {
+    element: Element;
+    value: string;
+};
+const bindings: Record<string, E> = {};
 
-// Actualización 1
-// const bindings: Record<string, HTMLElement> = {
-//     msg: document.getElementById("msg")!,
-//     count: document.getElementById("count")!,
-// };
+/**
+ * Ejemplo:
+ *  key =
+ *      {
+ *          msg: <span data-bind="msg">,
+ *          count: <span data-bind="count">
+ *      }
+ */
 
-// Usar el diccionario para escribir en el DOM
-// bindings["msg"].textContent = "Óscar";
-// bindings["count"].textContent = "3";
-
-// console.log(bindings);
-
-// Actualización 2
-const spans = document.querySelectorAll("[data-bind]");
-const bindings: Record<string, Element> = {};
+// Recorrer los <span> para guardar los atributos en un objeto bindings.
 
 spans.forEach((el) => {
-    const key = el.getAttribute("data-bind")!;
-    bindings[key] = el;
+    const key = el.getAttribute(BINDING_MARK)!; // ejemplo: key = "msg"
+    bindings[key] = {
+        element: el,
+        value: el.textContent || "",
+    };
 });
 
-console.log(bindings);
-console.log(bindings["count"].textContent);
+// API externa para manipulación de los atributos "msg" y "count"
+const api: Record<string, string> = {};
+
+function link() {
+    Object.keys(bindings).forEach((bindingAttribute) => {
+        Object.defineProperty(api, bindingAttribute, {
+            // bindings["user"].element
+            set: (value: string) => {
+                // Edito en memoria
+                bindings[bindingAttribute].value = value;
+                // Edito en el DOM
+                bindings[bindingAttribute].element.textContent = value;
+            },
+            get: () => bindings[bindingAttribute].value,
+        });
+    });
+}
+
+link();
+api.user = "chatran";
+api.count = "2";
+
+console.log(api.user);
