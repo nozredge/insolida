@@ -7,11 +7,11 @@ su versión 0.6.0.
 
 #### Descripción
 
-**_Insolida_** (nombre en latín que significa "suave") nace como una forma de
-aprender en profundidad cómo funcionan los frameworks y bibliotecas web modernas
-creando una versión propia desde cero (así como lo hizo Evan You en el 2013)
-tomando como referencia las versiones tempranas del código original de Vue.js.
-Todos mis avances se irán subiendo a este repositorio.
+**_Insolida_** nace como una forma de aprender en profundidad cómo funcionan los
+frameworks y bibliotecas web modernas creando una versión propia desde cero (así
+como lo hizo Evan You en el 2013) tomando como referencia las versiones
+tempranas del código original de Vue.js. Todos mis avances se irán subiendo a
+este repositorio.
 
 #### 📌 Objetivos principales del proyecto
 
