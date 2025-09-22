@@ -1,31 +1,11 @@
 const BINDING_MARK = "data-bind";
-const spans = document.querySelectorAll("[" + BINDING_MARK + "]");
 type E = {
     element: Element;
     value: string;
 };
 const bindings: Record<string, E> = {};
 
-/**
- * Ejemplo:
- *  key =
- *      {
- *          msg: <span data-bind="msg">,
- *          count: <span data-bind="count">
- *      }
- */
-
-// Recorrer los <span> para guardar los atributos en un objeto bindings.
-
-spans.forEach((el) => {
-    const key = el.getAttribute(BINDING_MARK)!; // ejemplo: key = "msg"
-    bindings[key] = {
-        element: el,
-        value: el.textContent || "",
-    };
-});
-
-// API externa para manipulación de los atributos "msg" y "count"
+// API externa para manipulación de los atributos encontrados
 const api: Record<string, string> = {};
 
 function link() {
@@ -43,8 +23,34 @@ function link() {
     });
 }
 
-link();
-api.user = "chatran";
-api.count = "2";
+function tokenize(id: string) {
+    const parent = document.getElementById(id);
+    if (parent === null) throw new Error(`${parent} does not exist`);
+    const exp = /\{(\w+)\}/g;
 
-console.log(api.user);
+    const tokens = parent.innerHTML.replace(
+        exp,
+        (_match, value) => `<span ${BINDING_MARK}="${value}"></span>`,
+    );
+
+    parent.innerHTML = tokens;
+
+    // Recorrer los <span> para guardar los atributos en un objeto bindings.
+    const spans = document.querySelectorAll("[" + BINDING_MARK + "]");
+    spans.forEach((el) => {
+        const key = el.getAttribute(BINDING_MARK)!; // ejemplo: key = "msg"
+        bindings[key] = {
+            element: el,
+            value: el.textContent || "",
+        };
+    });
+}
+
+// Primero se convierten los {var} a <span data-bind="var"></span>
+tokenize("test");
+
+// Para crear la API externa con atributos setter y getter
+link();
+
+api.cat = "chatran";
+api.age = "8";
