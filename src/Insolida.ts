@@ -18,12 +18,23 @@ export default class Insolida {
             Object.defineProperty(this.api, bindingAttribute, {
                 // bindings["user"].element
                 set: (value: string) => {
-                    // Edito en memoria
-                    this.bindings[bindingAttribute].value = value;
-                    // Edito en el DOM
-                    this.bindings[bindingAttribute].element.textContent = value;
+                    if (!this.bindings[bindingAttribute]) {
+                        this.bindings[bindingAttribute] = [];
+                    }
+
+                    for (
+                        let i = 0;
+                        i < this.bindings[bindingAttribute].length;
+                        i++
+                    ) {
+                        // Edito en memoria
+                        this.bindings[bindingAttribute][i].value = value;
+                        // Edito en el DOM
+                        this.bindings[bindingAttribute][i].element.textContent =
+                            value;
+                    }
                 },
-                get: () => this.bindings[bindingAttribute].value,
+                get: () => this.bindings[bindingAttribute],
             });
         });
     }
@@ -46,10 +57,15 @@ export default class Insolida {
         const spans = document.querySelectorAll("[" + this.BINDING_MARK + "]");
         spans.forEach((el) => {
             const key = el.getAttribute(this.BINDING_MARK)!; // ejemplo: key = "msg"
-            this.bindings[key] = {
+
+            if (!this.bindings[key]) {
+                this.bindings[key] = [];
+            }
+
+            this.bindings[key].push({
                 element: el, // Siempre va a haber <span data-bind="var"></span>
                 value: key || "",
-            };
+            });
         });
     }
 

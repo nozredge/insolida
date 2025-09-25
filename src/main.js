@@ -1,7 +1,6 @@
 import Insolida from "./Insolida.ts";
 const app = new Insolida({
-    cat: "gaspar",
-    age: 1,
+    dog: "simba",
 }, "test");
-app.getApi().cat = "chatran";
-app.getApi().age = 8;
+app.getApi().insolida = "insolida";
+app.getApi().robot = "robot";
