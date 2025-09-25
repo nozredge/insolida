@@ -2,8 +2,7 @@
 
 ---
 
-Este proyecto está basado en el código original de Evan You para **Vue.js** en
-su versión 0.6.0.
+Este proyecto está basado en el código original de Evan You para **Vue.js**.
 
 #### Descripción
 
@@ -15,20 +14,13 @@ este repositorio.
 
 #### 📌 Objetivos principales del proyecto
 
-- ✔️ Mejorar conocimientos en Typescript como genéricos, _utility types_,
-  objetos y demás.
+- ✔️ Mejorar conocimientos en Typescript y aprender más.
 
-- ✔️ Vue.js comenzó completamente en JavaScript. _Insolida_ comienza en
-  Typescript.
+- ✔️ Aprender a usar el método estático Object.defineProperty().
 
-- ✔️ Aprender a usar el método estático Object.defineProperty() que definió la
-  forma en que Evan implementaría reactividad en Vue.js.
+- ✔️ Crear una versión mínima de framework funcional.
 
-- ✔️ Crear una versión mínima propia de Vue.js funcional, aunque sea prototipo,
-  para poder usarlo en proyectos web personales. Básicamente, un laboratorio
-  virtual.
-
-- ✔️ Aprender cómo funciona la reactividad en frameworks y cómo aplicarla.
+- ✔️ Aprender cómo funciona la reactividad, virtual DOM, qué es diffing y demás.
 
 - ✔️ Divertirme: todo esto lo hago por pura entretención y creo que tengo suerte
   de poder decirlo.
